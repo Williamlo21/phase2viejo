@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../img/sena.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    min-height: 90vh;
+    /* min-width: 50vh; */
+    margin: 0;
+    padding: 0;
+
+}
+
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    max-width: 600px;
+    margin: 10vh auto;
+    padding: 20px;
+    background-color: rgba(255, 165, 0, 0.5);
+    border-radius: 20px;
+}
+
+/* Estilos para el título */
+.loginTitulo {
+    text-align: center;
+}
+
+/* Estilos para el logo */
+.loginLogo {
+    margin-bottom: 20px;
+    margin-right: 10%;
+}
+
+/* Estilos para el formulario */
+.loginFormulario {
+    text-align: center;
+}
+
+/* Estilos para el área de administrador */
+.loginAdministrador {
+    margin-top: 20px;
+}
+
+/* Estilos para el formulario dentro de loginFormulario */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos para las etiquetas del formulario */
+label {
+    margin-bottom: 5px;
+}
+
+/* Estilos para los campos de texto del formulario */
+input[type="text"],
+input[type="password"] {
+    width: 250px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Estilos para el botón del formulario */
+button {
+    padding: 10px 20px;
+    background-color: #337ab7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #23527c;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 165, 0, 0.5);
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
