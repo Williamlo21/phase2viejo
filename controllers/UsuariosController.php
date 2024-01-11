@@ -7,7 +7,9 @@ class UsuariosController
     {
         require_once "views/usuarios/registro.php";
     }
-
+    public function prueba(){
+        require_once "views/usuarios/prueba.php";
+    }
     public function guardar()
     {
         $primerNombre = isset($_POST['primerNombre']) ? $_POST['primerNombre'] : '';

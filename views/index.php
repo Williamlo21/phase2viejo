@@ -10,10 +10,10 @@
         <div class="loginFormulario">
             <form action="#" method="post">
                 <label for="usuario">Usuario</label>
-                <input type="text" name="usuario">
+                <input type="text" name="usuario"  >
 
                 <label for="contrasena">Contraseña</label>
-                <input type="password">
+                <input type="password" name="contrasena">
 
                 <button type="submit" class="loginBotonIniciarsesion">INICIAR SESIÓN</button>
             </form>
