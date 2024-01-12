@@ -1,10 +1,16 @@
+<div class="datosUsuario">
 
-<div class="loginContainer">
-    
-    <div class="loginFormulario">
-        <form action="procesar_datos.php" method="post">
+    <div class="registroFormulario">
+        <form action="<?= base_url ?>Usuarios/guardar" method="post">
             <label for="tipoDocumento">Tipo de Documento:</label>
-            <input type="text" name="tipoDocumento" required>
+            <select name="tipoDocumento" required>
+                <option value="1">CEDULA DE CIUDADANIA</option>
+                <option value="2">TARJETA DE IDENTIDAD</option>
+                <option value="3">REGISTRO CIVIL</option>
+                <option value="4">CEDULA DE EXTRANJERIA</option>
+                <option value="5">PASAPORTE</option>
+                <option value="0">OTRO</option>
+            </select>
 
             <label for="numeroDocumento">Número de Documento:</label>
             <input type="text" name="numeroDocumento" required pattern="[0-9]+">
@@ -24,20 +30,23 @@
             <label for="fechaNacimiento">Fecha de Nacimiento:</label>
             <input type="date" name="fechaNacimiento" required>
 
+            <label for="edad">Edad:</label>
+            <input type="text" name="edad" required pattern="[0-9]+">
+
             <label for="genero">Género:</label>
             <select name="genero" required>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="otro">Otro</option>
+                <option value="1">MASCULINO</option>
+                <option value="2">FEMENINO</option>
+                <option value="0">OTRO</option>
             </select>
 
             <label for="roll">Rol:</label>
             <select name="roll" required>
-                <option value="APRENDIZ">Aprendiz</option>
-                <option value="ADMINISTRADOR">Administrador</option>
-                <option value="INSTRUCTOR">Instructor</option>
-                <option value="ADMINISTRATIVO">Administrativo</option>
-                <option value="VISITANTE">Visitante</option>
+                <option value="1">APRENDIZ</option>
+                <option value="2">ADMINISTRADOR</option>
+                <option value="3">INSTRUCTOR</option>
+                <option value="5">ADMINISTRATIVO</option>
+                <option value="6">VISITANTE</option>
             </select>
 
             <label for="direccion">Dirección:</label>

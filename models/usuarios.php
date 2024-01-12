@@ -17,7 +17,7 @@ class Usuario
     private $direccion;
     private $telefono;
     private $correoElectronico;
-    private $usuario;
+    private $user;
     private $contrasena;
     public $db;
 
@@ -32,6 +32,32 @@ class Usuario
             exit;
         }
     }
+    public function getTipoDocumento()
+    {
+        return $this->tipoDocumento;
+    }
+
+
+    public function setTipoDocumento($tipoDocumento)
+    {
+        $this->tipoDocumento = $this->db->real_escape_string($tipoDocumento);
+
+        return $this;
+    }
+
+    public function getNumeroDocumento()
+    {
+        return $this->numeroDocumento;
+    }
+
+
+    public function setNumeroDocumento($numeroDocumento)
+    {
+        $this->numeroDocumento = $this->db->real_escape_string($numeroDocumento);
+
+        return $this;
+    }
+
 
     public function getPrimerNombre()
     {
@@ -94,7 +120,61 @@ class Usuario
 
         return $this;
     }
+    public function getGenero()
+    {
+        return $this->genero;
+    }
 
+    public function getRoll()
+    {
+        return $this->roll;
+    }
+
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    public function getuser()
+    {
+        return $this->user;
+    }
+
+    // Métodos Set para cada variable
+
+    public function setGenero($genero)
+    {
+        $this->genero = $this->db->real_escape_string($genero);
+        return $this;
+    }
+
+    public function setRoll($roll)
+    {
+        $this->roll = $this->db->real_escape_string($roll);
+        return $this;
+    }
+
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $this->db->real_escape_string($direccion);
+        return $this;
+    }
+
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $this->db->real_escape_string($telefono);
+        return $this;
+    }
+
+    public function setUser($user) {
+        $this->user = $this->db->real_escape_string($user);
+        return $this;
+    }
     public function getEdad()
     {
         return $this->edad;
@@ -102,7 +182,7 @@ class Usuario
 
     public function setEdad($edad)
     {
-        $this->edad = $edad;
+        $this->edad = $this->db->real_escape_string($edad);
 
         return $this;
     }
@@ -133,35 +213,36 @@ class Usuario
 
     public function guardar()
     {
-        $sql = "INSERT INTO usuarios VALUES (NULL, '{$this->getPrimerNombre()}', '{$this->getSegundoNombre()}', '{$this->getPrimerApellido()}', '{$this->getSegundoApellido()}', '{$this->getFechaNacimiento()}', '{$this->getEdad()}', '{$this->getCorreoElectronico()}', '{$this->getContrasena()}')";
+        $sql = "INSERT INTO users 
+        VALUES (NULL,'{$this->getTipoDocumento()}', '{$this->getNumeroDocumento()}', '{$this->getPrimerNombre()}', '{$this->getSegundoNombre()}', '{$this->getPrimerApellido()}', '{$this->getSegundoApellido()}', '{$this->getFechaNacimiento()}', '{$this->getEdad()}', '{$this->getGenero()}', '{$this->getRoll()}', '{$this->getDireccion()}', '{$this->getTelefono()}', '{$this->getCorreoElectronico()}', '{$this->getuser()}', '{$this->getContrasena()}')";
         if ($this->db->query($sql)) {
             // Éxito: registro insertado correctamente
-            echo "Usuario insertado correctamente";
+            echo "user registrado correctamente";
             die();
         } else {
             // Error al insertar el registro
-            echo "Error al insertar usuario: " . $this->db->error;
+            echo "Error al insertar user: " . $this->db->error;
             die();
         }
     }
     public function loguearse()
     {
         $result = false;
-        $correoElectronico = $this->correoElectronico;
+        $user = $this->user;
         $contrasena = $this->contrasena;
 
-        // comprobar si existe el usuario
-        $sql = "SELECT * FROM usuarios WHERE correoElectronico = '$correoElectronico'";
+        // comprobar si existe el user
+        $sql = "SELECT * FROM users WHERE user = '$user'";
         $login = $this->db->query($sql);
 
         if ($login && $login->num_rows == 1) {
-            $usuario = $login->fetch_object();
+            $user = $login->fetch_object();
 
             // verificar la contraseña
-            $verify = password_verify($contrasena, $usuario->contrasena);
+            $verify = password_verify($contrasena, $user->contrasena);
 
             if ($verify) {
-                $result = $usuario;
+                $result = $user;
             }
         }
         return $result;
