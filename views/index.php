@@ -1,6 +1,6 @@
 <?php
     if(isset($_SESSION['identity'])){
-        echo "Ya iniciaste sesion";
+        
         
     }else{
     
