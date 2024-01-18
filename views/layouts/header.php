@@ -9,24 +9,36 @@
 </head>
 
 <body>
-  <h1>header</h1>
   <?php
-  if (isset($_SESSION['identity'])){
+  if (isset($_SESSION['identity'])) {
 
- ?>
-  <div class="cursor-container">
-    <div class="cabecera">
-      <?php
-      if (isset($_SESSION['identity'])) {
-      ?>
-        <h3>Bienvenido <?php echo $_SESSION['identity']->primerNombre . " " . $_SESSION['identity']->primerApellido; ?></h3>
-      <?php
-      } else {
+  ?>
+    <div class="cursor-container">
+      <div class="cabecera">
+        <?php
+        if (isset($_SESSION['identity'])) {
         ?>
-        <h3>¿No has iniciado sesión? ve ya mismo a disfrutar de los beneficios de nuestra aplicación!</h3>
-      <?php
-      }
-      ?>
+          <div class="cabeceraBienvenida">
+            <div class="cabeceraBienvenidaUsuario">
+              <h3>Bienvenido <?php echo $_SESSION['identity']->primer_nombre . " " . $_SESSION['identity']->primer_apellido; ?></h3>
+            </div>
+            <div class="cabeceraBienvenidaSede">
+              <p><strong>Sede:</strong>Modelo 950001</p>
+              <!-- Aqui debemos hacer el proceso para poner en que sede se ha iniciado sesion si es un  vigilante -->
+            </div>
+          </div>
+          <form action=" <?= base_url ?>usuarios/logout" method="post">
+            <button class="botonCerrarSesionB" type="submit"><img class="botonCerrarSesionImagen" src=" <?= base_url ?>assets/img/botonRojo.png" alt="cerrar sesion">Cerrar sesion</button>
+          </form>
+      </div>
+
+    <?php
+        } else {
+    ?>
+      <h3>¿No has iniciado sesión? ve ya mismo a disfrutar de los beneficios de nuestra aplicación!</h3>
+    <?php
+        }
+    ?>
 
     </div>
     <ul>
@@ -39,6 +51,6 @@
       <?php } ?>
 
     </ul>
-<?php
-    }
+  <?php
+  }
   ?>

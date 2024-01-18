@@ -1,3 +1,11 @@
+<?php
+    if(isset($_SESSION['identity'])){
+        echo "Ya iniciaste sesion";
+        
+    }else{
+    
+?>
+
 <div class="loginContainer">
 
     <div class="loginLogo">
@@ -8,9 +16,9 @@
             <h1>INICIAR SESIÓN</h1>
         </div>
         <div class="loginFormulario">
-            <form action="#" method="post">
-                <label for="usuario">Usuario</label>
-                <input type="text" name="usuario"  >
+            <form action="<?= base_url ?>Usuarios/iniciarsesion" method="post">
+                <label for="user">Usuario</label>
+                <input type="text" name="user">
 
                 <label for="contrasena">Contraseña</label>
                 <input type="password" name="contrasena">
@@ -19,9 +27,12 @@
             </form>
         </div>
         <div class="loginAdministrador">
-            <a href="<?=base_url?>Usuarios/registrar">¿No tienes cuenta aun?</a><br>
-            
+            <a href="<?= base_url ?>Usuarios/registrar">¿No tienes cuenta aun?</a><br>
+
         </div>
     </div>
 
 </div>
+<?php
+}
+?>

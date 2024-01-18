@@ -213,15 +213,21 @@ class Usuario
 
     public function guardar()
     {
-        $sql = "INSERT INTO users 
+        $sql = "INSERT INTO usuarios
         VALUES (NULL,'{$this->getTipoDocumento()}', '{$this->getNumeroDocumento()}', '{$this->getPrimerNombre()}', '{$this->getSegundoNombre()}', '{$this->getPrimerApellido()}', '{$this->getSegundoApellido()}', '{$this->getFechaNacimiento()}', '{$this->getEdad()}', '{$this->getGenero()}', '{$this->getRoll()}', '{$this->getDireccion()}', '{$this->getTelefono()}', '{$this->getCorreoElectronico()}', '{$this->getuser()}', '{$this->getContrasena()}')";
         if ($this->db->query($sql)) {
             // Éxito: registro insertado correctamente
-            echo "user registrado correctamente";
-            die();
+            header("Refresh: 2; url=" . base_url );
+
+            // Mensaje opcional antes de la redirección
+            echo "Guardado exitosamente. Redirigiendo en 2 segundos...";
+
+            // Finalizar ejecución del script
+            exit;
+
         } else {
             // Error al insertar el registro
-            echo "Error al insertar user: " . $this->db->error;
+            echo "Error al insertar usuario: " . $this->db->error;
             die();
         }
     }
@@ -232,7 +238,7 @@ class Usuario
         $contrasena = $this->contrasena;
 
         // comprobar si existe el user
-        $sql = "SELECT * FROM users WHERE user = '$user'";
+        $sql = "SELECT * FROM usuarios WHERE usuario = '$user'";
         $login = $this->db->query($sql);
 
         if ($login && $login->num_rows == 1) {

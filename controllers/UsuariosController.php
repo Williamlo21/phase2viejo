@@ -50,10 +50,12 @@ class UsuariosController
                 $usuario->setUser($user);
                 $usuario->setContrasena($contrasena);
 
+                ob_start(); // Activar el búfer de salida
                 // Guardar el usuario (suponiendo que tienes un método guardar en la clase Usuario)
                 $usuario->guardar();
-
-                // Puedes realizar acciones adicionales después de guardar, como redireccionar o mostrar un mensaje de éxito
+                // Redireccionar a la página principal (o a la que desees)
+                echo '<script>window.location.href = "' . base_url . '";</script>';
+                exit;
             } else {
                 // Campos obligatorios vacíos, manejar de acuerdo a tus necesidades
                 echo "Campos obligatorios no pueden estar vacíos.";
@@ -74,7 +76,7 @@ class UsuariosController
             //Identificar  al usuario 
             //Consulta a la base datos
             $usuario = new Usuario();
-            $usuario->setCorreoElectronico($_POST['correoElectronico']);
+            $usuario->setUser($_POST['user']);
             $usuario->setContrasena($_POST['contrasena']);
 
             $identity = $usuario->loguearse();

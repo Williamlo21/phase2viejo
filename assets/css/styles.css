@@ -13,56 +13,63 @@ body {
 
 }
 
-
 .datosUsuario {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
     background-color: rgba(255, 165, 0, 0.5);
+    border-radius: 20px;
+    padding: 5%;
+    width: 70%;
+    max-width: 800px;
+    margin: 10vh auto;
+    overflow-y: auto;
+    margin-bottom: 50px;
 }
 
-/* Estilo para el formulario */
 .registroFormulario {
-    display: flex;
-    flex-direction: column;
+    text-align: center;
 }
 
-/* Estilo para los elementos label */
+.registroFormulario form {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    /* Divide el formulario en cuatro columnas iguales */
+}
+
 .registroFormulario label {
     font-weight: bold;
-    margin-bottom: 5px;
-    width: 40%;
-    padding: 10px;
-    display: flex;
 }
 
-/* Estilo para los elementos input y select */
 .registroFormulario input,
-.registroFormulario select,
-.registroFormulario date {
-    width: 40%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid ;
-    display: flex;
-        justify-content: space-between;
+.registroFormulario select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-/* Estilo para el botón de envío */
-.registroFormulario input[type="submit"] {
-    background-color: .4CAF50;
+.registroFormulario button {
+    width: auto;
+    padding: 5px 10px;
+    background-color: green;
     color: white;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-.registroFormulario input[type="submit"]:hover {
-    background-color: .45a049;
+.registroFormulario p {
+    margin-top: 20px;
+    font-size: 14px;
 }
 
-
-
+/* Alinear el enlace a la derecha */
+.registroFormulario a {
+    text-align: right;
+    display: block;
+    margin-top: 10px;
+}
 /* aqui esta el css del login */
 .loginContainer {
     display: flex;
@@ -132,13 +139,56 @@ button {
 button:hover {
     background-color: .23527c;
 }
+
+
+/* aqui va la parte de la cabecera */
+
+.cabeceraBienvenida {
+    position: relative;
+        margin-top: 0;
+        width: 100%;
+        height: 5%;
+        background-color: rgba(255, 165, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+}
+
+.botonCerrarSesion {
+position: absolute;
+
+    top: 12%;
+    /* Agregado margen inferior */
+    right: 5%;
+    /* Agregado margen derecho */
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo adicional para el botón */
+.botonCerrarSesionB {
+    border-radius:  50px;
+    background-color: white;
+    padding: auto;
+    color: black;
+    cursor: pointer;
+}
+
+.botonCerrarSesionImagen{
+    width: 40px;
+}
+
 footer {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+    height: 50px;
     background-color: rgba(255, 165, 0, 0.5);
     color: white;
-    padding: 10px 0;
+    padding: 0;
+    margin-top: 100%;
     text-align: center;
 }
