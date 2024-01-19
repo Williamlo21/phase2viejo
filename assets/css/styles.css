@@ -227,7 +227,7 @@ position: absolute;
 
 /* Estilos para el enlace activo */
 .barraNavegacion li.active a {
-    background-color: #ddd;
+    background-color: green;
     color: #333;
 }
 
@@ -235,7 +235,7 @@ position: absolute;
 .main{
     position: absolute;
     top: 33%;
-    width: 80%;
+    width:  80%;
     height: 50%;
     float: left;
     background-color: rgba(255, 255, 255, 0.5);

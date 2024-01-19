@@ -8,36 +8,55 @@ class UsuariosController
         require_once "views/usuarios/registro.php";
     }
     // la sesion nav es para la barra de navegacion. de acuerdo al enlace que se seleccione
-    public function destruirSesion(){
+    public function destruirSesionMenu(){
+        // esta funcion nos ayuda a destruir la sesion nav
         unset($_SESSION['nav']);
     }
+    public function destruirSesionOpcion()
+    {
+        // esta funcion nos ayuda a destruir la sesion opcion
+        unset($_SESSION['opcion']);
+    }
     public function redireccionar(){
-
+        // esta funcion nos recarga la página.
         require_once 'views/helper/redireccionar.php';
     }
+    // utilizamos sesiones para asi mostrar lo correspondiente en el aside y el main.
+    // la sesion nav es un array asociativo. el menu es para la opcion seleccionada en la barra de navegacion y opcion, es para seleccionar la opcion hecha en el aside.
     public function miPerfil(){
         // eliminamos toda sesion de nav
 
-        $this->destruirSesion();
-        $_SESSION['nav'] = 'miPerfil';
+        $this->destruirSesionMenu();
+        $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'verPerfil');
         $this->redireccionar();
     }
     public function hacerRegistro(){
-        $this->destruirSesion();
-        $_SESSION['nav'] = 'hacerRegistro';
+        $this->destruirSesionMenu();
+        $_SESSION['nav'] = array('menu'=> 'hacerRegistro' );
         $this->redireccionar();
     }
     public function informes(){
-        $this->destruirSesion();
-        $_SESSION['nav'] = 'informes';
+        $this->destruirSesionMenu();
+        $_SESSION['nav'] = array('menu' => 'informes');
         $this->redireccionar();
     }
     public function crearVigilante(){
-        $this->destruirSesion();
-        $_SESSION['nav'] = 'crearVigilante';
+        $this->destruirSesionMenu();
+        $_SESSION['nav'] = array('menu' => 'crearVigilante');
         $this->redireccionar();
     }
-
+    // aqui debemos hacer las sesiones para las opciones del aside segun la opcion seleccionada de la barra de mavegacion
+    public function verPerfil(){
+        $this->destruirSesionOpcion();
+        $_SESSION['nav'] = array('menu' => 'miPerfil','opcion' => 'verPerfil');
+        $this->redireccionar();
+    }
+    public function modificarPerfil()
+    {
+        $this->destruirSesionOpcion();
+        $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'modificarPerfil');
+        $this->redireccionar();
+    } 
     public function guardar()
     {
         // Obtener valores de $_POST o ajustar según la fuente de datos
@@ -129,6 +148,7 @@ class UsuariosController
         if (isset($_SESSION['admin'])) {
             unset($_SESSION['admin']);
         }
+        session_destroy();
         header("Location:" . base_url);
     }
 }

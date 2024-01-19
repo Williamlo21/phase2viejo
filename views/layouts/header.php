@@ -39,9 +39,12 @@
   8: Super Admin  -->
     <!-- Seleccion de opciones que se muestran en la barra de navegacion de acuerdo al roll -->
     <?php
+    if (!isset($_SESSION['nav']) || !is_array($_SESSION['nav'])) {
+      $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'verPerfil');
+    }
     $miPerfilClass = $hacerRegistroClass = $informesClass = $crearVigilanteClass = '';
 
-    switch ($_SESSION['nav']) {
+    switch ($_SESSION['nav']['menu']) {
       case 'miPerfil':
         $miPerfilClass = 'active';
         break;
@@ -57,6 +60,8 @@
         // Agrega más casos según sea necesario
     }
     ?>
+
+
 
     <nav class="barraNavegacion">
       <ul>
