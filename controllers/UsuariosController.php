@@ -7,6 +7,25 @@ class UsuariosController
     {
         require_once "views/usuarios/registro.php";
     }
+    // la sesion nav es para la barra de navegacion. de acuerdo al enlace que se seleccione
+    public function miPerfil(){
+        // eliminamos toda sesion de nav
+        unset($_SESSION['nav']);
+        $_SESSION['nav'] = 'miPerfil';
+    }
+    public function hacerRegistro(){
+        unset($_SESSION['nav']);
+        $_SESSION['nav'] = 'hacerRegistro';
+    }
+    public function informes(){
+        unset($_SESSION['nav']);
+        $_SESSION['nav'] = 'informes';
+    }
+    public function crearVigilante(){
+        unset($_SESSION['nav']);
+        $_SESSION['nav'] = 'crearVigilante';
+    }
+
     public function guardar()
     {
         // Obtener valores de $_POST o ajustar según la fuente de datos

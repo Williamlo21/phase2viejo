@@ -213,6 +213,27 @@ position: absolute;
     padding: 10px;
     display: block;
 }
+
+.main{
+    position: absolute;
+    top: 33%;
+    width: 80%;
+    height: 50%;
+    float: left;
+    background-color: rgba(255, 255, 255, 0.5);
+    
+    color: black;
+    align-items: center;
+    align-content: center;
+}
+.aside{
+    position: absolute;
+    top: 33%;
+    right: 0;
+    width: 20%;
+    height: 50%;
+    background-color: rgba(0, 0, 255, 0.5);
+}
 footer {
     position: fixed;
     bottom: 0;
