@@ -184,7 +184,7 @@ position: absolute;
     width: 40px;
 }
 
-.barraNavegacion{
+.barraNavegacion {
     position: absolute;
     top: 28%;
     width: 100%;
@@ -194,17 +194,24 @@ position: absolute;
     background-color: rgba(255, 165, 0, 0.5);
     align-items: center;
     align-content: center;
-
+    overflow: hidden;
+    /* Añadimos overflow: hidden para ocultar el contenido que se sale */
 }
+
 .barraNavegacion ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     justify-content: space-around;
+    height: 100%;
+    /* Ajustamos el height para que ocupe toda la altura de la barraNavegacion */
 }
+
 .barraNavegacion li {
     display: inline;
+    height: 100%;
+    /* Ajustamos el height para que ocupe toda la altura de la barraNavegacion */
 }
 
 .barraNavegacion a {
@@ -212,7 +219,18 @@ position: absolute;
     color: black;
     padding: 10px;
     display: block;
+    height: 100%;
+    /* Ajustamos el height para que ocupe toda la altura de la barraNavegacion */
+    box-sizing: border-box;
+    /* Mantenemos el padding dentro del tamaño total */
 }
+
+/* Estilos para el enlace activo */
+.barraNavegacion li.active a {
+    background-color: #ddd;
+    color: #333;
+}
+
 
 .main{
     position: absolute;
@@ -226,14 +244,55 @@ position: absolute;
     align-items: center;
     align-content: center;
 }
-.aside{
+.aside {
     position: absolute;
     top: 33%;
     right: 0;
     width: 20%;
     height: 50%;
     background-color: rgba(255, 255, 255, 0.5);
-    border-left: solid 2px gray 2px;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
+    /* Agregamos la sombra al lado izquierdo */
+    border-left: solid 2px gray;
+}
+
+.aside p {
+    margin: 10px;
+    font-size: 14px;
+}
+
+.aside article {
+    padding: 10px;
+}
+
+.aside ul {
+    list-style: none;
+    padding: 0;
+}
+
+.aside li {
+    margin-bottom: 8px;
+}
+
+.aside a {
+    text-decoration: none;
+    color: #333;
+    /* Color del texto de los enlaces */
+    font-weight: bold;
+    /* Hacemos que el texto sea más grueso */
+    display: block;
+    padding: 8px;
+    background-color: #eee;
+    /* Color de fondo de los enlaces */
+    border-radius: 4px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s ease;
+    /* Transición suave para el cambio de color de fondo */
+}
+
+.aside a:hover {
+    background-color: #ddd;
+    /* Cambio de color de fondo al pasar el ratón sobre los enlaces */
 }
 footer {
     position: fixed;
