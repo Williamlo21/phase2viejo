@@ -8,22 +8,34 @@ class UsuariosController
         require_once "views/usuarios/registro.php";
     }
     // la sesion nav es para la barra de navegacion. de acuerdo al enlace que se seleccione
+    public function destruirSesion(){
+        unset($_SESSION['nav']);
+    }
+    public function redireccionar(){
+
+        require_once 'views/helper/redireccionar.php';
+    }
     public function miPerfil(){
         // eliminamos toda sesion de nav
-        unset($_SESSION['nav']);
+
+        $this->destruirSesion();
         $_SESSION['nav'] = 'miPerfil';
+        $this->redireccionar();
     }
     public function hacerRegistro(){
-        unset($_SESSION['nav']);
+        $this->destruirSesion();
         $_SESSION['nav'] = 'hacerRegistro';
+        $this->redireccionar();
     }
     public function informes(){
-        unset($_SESSION['nav']);
+        $this->destruirSesion();
         $_SESSION['nav'] = 'informes';
+        $this->redireccionar();
     }
     public function crearVigilante(){
-        unset($_SESSION['nav']);
+        $this->destruirSesion();
         $_SESSION['nav'] = 'crearVigilante';
+        $this->redireccionar();
     }
 
     public function guardar()

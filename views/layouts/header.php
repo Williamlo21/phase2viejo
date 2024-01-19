@@ -45,13 +45,13 @@
         <?php
         if ($_SESSION['identity']->id_roll == 2 || $_SESSION['identity']->id_roll == 4 || $_SESSION['identity']->id_roll == 8) {
         ?>
-          <li><a href="<?= base_url ?>usuarios/login">Hacer registro</a></li>
-          <li><a href="<?= base_url ?>">Informes</a></li>
+          <li><a href="<?= base_url ?>usuarios/hacerRegistro">Hacer registro</a></li>
+          <li><a href="<?= base_url ?>usuarios/informes">Informes</a></li>
         <?php
         }
         if ($_SESSION['identity']->id_roll == 2 || $_SESSION['identity']->id_roll == 8) {
         ?>
-          <li><a href="<?= base_url ?>usuarios/login">Crear vigilante</a></li>
+          <li><a href="<?= base_url ?>usuarios/crearVigilante">Crear vigilante</a></li>
         <?php
         }
         ?>
