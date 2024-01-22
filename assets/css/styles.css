@@ -232,24 +232,25 @@ position: absolute;
 }
 
 
-.main{
+.main {
     position: absolute;
     top: 33%;
-    width:  80%;
-    height: 50%;
+    width: 80%;
+    height: 80%;
     float: left;
     background-color: rgba(255, 255, 255, 0.5);
-    
     color: black;
     align-items: center;
     align-content: center;
+    margin-bottom: 100px;
+    /* Add this line */
 }
 .aside {
     position: absolute;
     top: 33%;
     right: 0;
     width: 20%;
-    height: 50%;
+    height: 80%;
     background-color: rgba(255, 255, 255, 0.5);
     box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
     /* Agregamos la sombra al lado izquierdo */
@@ -293,6 +294,80 @@ position: absolute;
 .aside a:hover {
     background-color: #ddd;
     /* Cambio de color de fondo al pasar el ratón sobre los enlaces */
+}
+.user-profile {
+    border-collapse: collapse;
+    width: 80%;
+    padding-top: 10px;
+    margin: 20px auto;
+
+}
+
+.user-profile th,
+.user-profile td {
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.user-profile th {
+    background-color: #f2f2f2;
+}
+.formularioPerfil {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    padding-left: 10%;
+}
+
+/* Estilos específicos para las secciones del formulario */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    text-align: left;
+}
+
+/* Ajusta el ancho de los select para que coincida con los input */
+select {
+    width: calc(100% - 20px);
+}
+
+/* Estilos para etiquetas y campos de entrada */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input,
+select {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Estilos para el botón */
+.botonModificar {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    background-color: green;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
 }
 footer {
     position: fixed;

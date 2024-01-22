@@ -171,7 +171,8 @@ class Usuario
         return $this;
     }
 
-    public function setUser($user) {
+    public function setUser($user)
+    {
         $this->user = $this->db->real_escape_string($user);
         return $this;
     }
@@ -217,14 +218,13 @@ class Usuario
         VALUES (NULL,'{$this->getTipoDocumento()}', '{$this->getNumeroDocumento()}', '{$this->getPrimerNombre()}', '{$this->getSegundoNombre()}', '{$this->getPrimerApellido()}', '{$this->getSegundoApellido()}', '{$this->getFechaNacimiento()}', '{$this->getEdad()}', '{$this->getGenero()}', '{$this->getRoll()}', '{$this->getDireccion()}', '{$this->getTelefono()}', '{$this->getCorreoElectronico()}', '{$this->getuser()}', '{$this->getContrasena()}')";
         if ($this->db->query($sql)) {
             // Éxito: registro insertado correctamente
-            header("Refresh: 2; url=" . base_url );
+            header("Refresh: 2; url=" . base_url);
 
             // Mensaje opcional antes de la redirección
             echo "Guardado exitosamente. Redirigiendo en 2 segundos...";
 
             // Finalizar ejecución del script
             exit;
-
         } else {
             // Error al insertar el registro
             echo "Error al insertar usuario: " . $this->db->error;
@@ -253,4 +253,43 @@ class Usuario
         }
         return $result;
     }
+    // Dentro de la clase Usuario
+    public $lastSqlQuery;
+
+    public function verUsuario()
+    {
+        $user = $_SESSION['identity']->id;
+
+        // Construir la consulta SQL
+        $sql = "SELECT usuarios.id, tipo_documento.descripcion AS tipo_de_documento, usuarios.num_documento,
+                usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido,
+                usuarios.fecha_nacimiento, usuarios.edad, generos.nombre, roles.nombre, usuarios.direccion,
+                usuarios.telefono, usuarios.correo_electronico, usuarios.usuario
+            FROM usuarios 
+            JOIN tipo_documento ON tipo_documento.id = usuarios.id_tipo_documento
+            JOIN generos ON generos.id = usuarios.id_generos
+            JOIN roles ON roles.id = usuarios.id_roll
+            WHERE usuarios.id = $user";
+
+        try {
+            // Almacena la consulta SQL en una variable
+            $this->lastSqlQuery = $sql;
+
+            $result = $this->db->query($sql);
+
+            if ($result === false) {
+                throw new Exception("Error en la consulta.");
+            }
+
+            // Obtener los datos reales de la consulta
+            $usuario = $result->fetch_assoc();
+
+            return $usuario;
+        } catch (Exception $e) {
+            // Manejar errores, puedes loguear el error o mostrar un mensaje genérico
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
 }

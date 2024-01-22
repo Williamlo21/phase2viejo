@@ -43,7 +43,6 @@
             <label for="roll">Rol:</label>
             <select name="roll" required>
                 <option value="1">APRENDIZ</option>
-                <option value="2">ADMINISTRADOR</option>
                 <option value="3">INSTRUCTOR</option>
                 <option value="5">ADMINISTRATIVO</option>
                 <option value="6">VISITANTE</option>

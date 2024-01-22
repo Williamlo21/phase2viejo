@@ -1,6 +1,7 @@
 <?php
 if (isset($_SESSION['identity'])) {
-  echo "el usuario es de rol: " . $_SESSION['identity']->id_roll;
+  // echo "el usuario es de rol: " . $_SESSION['identity']->id_roll;
+  // echo "id del usuario es: ". $_SESSION['identity']->id;
 ?>
   <main class="main">
     <?php
@@ -8,16 +9,15 @@ if (isset($_SESSION['identity'])) {
       case 'miPerfil':
         // Verificar si la clave 'opcion' está definida en $_SESSION
         switch ($_SESSION['nav']['opcion']) {
+          // comenzamos a hacer cada una de las opciones
           case 'verPerfil':
-    ?>
-            <li><a href="#">Opcion 1 registro</a></li>
-          <?php
-            echo "aqui van los datos del usuario";
+            
             require_once "views/usuarios/verPerfil.php";
             break;
           case 'modificarPerfil':
+          
+            require_once "views/usuarios/modificarPerfil.php";
           ?>
-            <h2>aqui modificamos el perfil o llamamos el formulario</h2>
         <?php
         break;
           default:

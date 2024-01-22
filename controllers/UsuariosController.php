@@ -46,10 +46,31 @@ class UsuariosController
         $this->redireccionar();
     }
     // aqui debemos hacer las sesiones para las opciones del aside segun la opcion seleccionada de la barra de mavegacion
-    public function verPerfil(){
+    public function verPerfil()
+    {
         $this->destruirSesionOpcion();
-        $_SESSION['nav'] = array('menu' => 'miPerfil','opcion' => 'verPerfil');
-        $this->redireccionar();
+        $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'verPerfil');
+
+        // Crear una instancia del usuario
+        $user = new Usuario;
+
+        // Llamar a la función para obtener el usuario
+        $_SESSION['miUsuario'] = $user->verUsuario();
+        // var_dump($_SESSION['miUsuario']);
+        // var_dump($usuario);
+        // die();
+
+        // Verificar si la consulta fue exitosa
+        if ($_SESSION['miUsuario'] !== false) {
+            // Incluir la vista que mostrará la información del usuario
+            // require_once 'views/usuarios/verPerfil.php';
+            $this->redireccionar();
+        } else {
+            // Manejar el caso en que la consulta no fue exitosa
+            echo "Error al obtener la información del usuario.";
+        }
+
+        // Puedes redireccionar si es necesario
     }
     public function modificarPerfil()
     {
@@ -57,6 +78,9 @@ class UsuariosController
         $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'modificarPerfil');
         $this->redireccionar();
     } 
+    public function modificar(){
+        
+    }
     public function guardar()
     {
         // Obtener valores de $_POST o ajustar según la fuente de datos
@@ -136,6 +160,13 @@ class UsuariosController
             } else {
                 $_SESSION['error_login'] = 'Identificacion fallida!!';
             }
+        }
+        if($_SESSION['identity']->id_roll!=4){
+
+            $this->verPerfil();
+        }else{
+            // echo "soy vigilante";
+            // die();
         }
         header("Location:" . base_url);
     }
