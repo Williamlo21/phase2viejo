@@ -211,6 +211,44 @@ class Usuario
 
         return $this;
     }
+    public function actualizar()
+    {
+        // Asumiendo que tienes un campo único para identificar al usuario, por ejemplo, su ID
+        $idUsuario = $_SESSION['identity']->id;
+
+        // Construye la consulta UPDATE excluyendo la contraseña
+        $sql = "UPDATE usuarios SET
+            tipo_documento = '{$this->getTipoDocumento()}',
+            numero_documento = '{$this->getNumeroDocumento()}',
+            primer_nombre = '{$this->getPrimerNombre()}',
+            segundo_nombre = '{$this->getSegundoNombre()}',
+            primer_apellido = '{$this->getPrimerApellido()}',
+            segundo_apellido = '{$this->getSegundoApellido()}',
+            fecha_nacimiento = '{$this->getFechaNacimiento()}',
+            edad = '{$this->getEdad()}',
+            genero = '{$this->getGenero()}',
+            roll = '{$this->getRoll()}',
+            direccion = '{$this->getDireccion()}',
+            telefono = '{$this->getTelefono()}',
+            correo_electronico = '{$this->getCorreoElectronico()}',
+            user = '{$this->getUser()}'
+            WHERE id = $idUsuario";
+
+        if ($this->db->query($sql)) {
+            // Éxito: registro actualizado correctamente
+            header("Refresh: 2; url=" . base_url);
+
+            // Mensaje opcional antes de la redirección
+            echo "Actualizado exitosamente. Redirigiendo en 2 segundos...";
+
+            // Finalizar ejecución del script
+            exit;
+        } else {
+            // Error al actualizar el registro
+            echo "Error al actualizar usuario: " . $this->db->error;
+            die();
+        }
+    }
 
     public function guardar()
     {
@@ -263,8 +301,8 @@ class Usuario
         // Construir la consulta SQL
         $sql = "SELECT usuarios.id, tipo_documento.descripcion AS tipo_de_documento, usuarios.num_documento,
                 usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido,
-                usuarios.fecha_nacimiento, usuarios.edad, generos.nombre, roles.nombre, usuarios.direccion,
-                usuarios.telefono, usuarios.correo_electronico, usuarios.usuario
+                usuarios.fecha_nacimiento, usuarios.edad, generos.nombre as genero, roles.nombre as roll, roles.id as id_roll, usuarios.direccion,
+                usuarios.telefono, usuarios.correo_electronico, usuarios.usuario, usuarios.contrasena
             FROM usuarios 
             JOIN tipo_documento ON tipo_documento.id = usuarios.id_tipo_documento
             JOIN generos ON generos.id = usuarios.id_generos
@@ -291,5 +329,4 @@ class Usuario
             return false;
         }
     }
-
 }

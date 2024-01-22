@@ -21,7 +21,7 @@
         </tr>
         <tr>
             <td><strong>Rol:</strong></td>
-            <td><?php echo $_SESSION['miUsuario']['nombre']; ?></td>
+            <td><?php echo $_SESSION['miUsuario']['roll']; ?></td>
         </tr>
         <tr>
             <td><strong>Dirección:</strong></td>
