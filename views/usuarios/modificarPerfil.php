@@ -84,10 +84,10 @@
 
             <tr>
                 <th>
-                    <label for="id_roll">Rol:</label>
+                    <label for="roll">Rol:</label>
                 </th>
                 <td>
-                    <select name="id_roll" required>
+                    <select name="roll" required>
                         <option value="1" <?= isset($_SESSION['miUsuario']['id_roll']) && $_SESSION['miUsuario']['id_roll'] == 1 ? 'selected' : '' ?>>APRENDIZ</option>
                         <option value="2" <?= isset($_SESSION['miUsuario']['id_roll']) && $_SESSION['miUsuario']['id_roll'] == 2 ? 'selected' : '' ?>>ADMINISTRADOR</option>
                         <option value="3" <?= isset($_SESSION['miUsuario']['id_roll']) && $_SESSION['miUsuario']['id_roll'] == 3 ? 'selected' : '' ?>>INSTRUCTOR</option>

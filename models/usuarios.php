@@ -218,25 +218,25 @@ class Usuario
 
         // Construye la consulta UPDATE excluyendo la contraseña
         $sql = "UPDATE usuarios SET
-            tipo_documento = '{$this->getTipoDocumento()}',
-            numero_documento = '{$this->getNumeroDocumento()}',
+            id_tipo_documento = '{$this->getTipoDocumento()}',
+            num_documento = '{$this->getNumeroDocumento()}',
             primer_nombre = '{$this->getPrimerNombre()}',
             segundo_nombre = '{$this->getSegundoNombre()}',
             primer_apellido = '{$this->getPrimerApellido()}',
             segundo_apellido = '{$this->getSegundoApellido()}',
             fecha_nacimiento = '{$this->getFechaNacimiento()}',
             edad = '{$this->getEdad()}',
-            genero = '{$this->getGenero()}',
-            roll = '{$this->getRoll()}',
+            id_generos = '{$this->getGenero()}',
+            id_roll = '{$this->getRoll()}',
             direccion = '{$this->getDireccion()}',
             telefono = '{$this->getTelefono()}',
             correo_electronico = '{$this->getCorreoElectronico()}',
-            user = '{$this->getUser()}'
+            usuario = '{$this->getUser()}'
             WHERE id = $idUsuario";
 
         if ($this->db->query($sql)) {
             // Éxito: registro actualizado correctamente
-            header("Refresh: 2; url=" . base_url);
+            header("Location:" . base_url);
 
             // Mensaje opcional antes de la redirección
             echo "Actualizado exitosamente. Redirigiendo en 2 segundos...";
