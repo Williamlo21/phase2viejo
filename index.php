@@ -40,6 +40,4 @@ if (class_exists($nombre_controlador)) {
     echo "error 404 pagina no encontrada";
 }
 
-
-
 require_once 'views/layouts/footer.php';

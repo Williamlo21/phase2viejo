@@ -60,8 +60,8 @@
             <label for="user">Usuario:</label>
             <input type="text" name="user" required>
 
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" name="contrasena" required>
+            <label for="password">Contraseña:</label>
+            <input type="password" name="password" required>
             <button type="submit">Enviar</button>
         </form>
         <p>¿Ya tienes cuenta?</p><a href="<?= base_url ?>">Inicia sesión aquí.</a><br>
