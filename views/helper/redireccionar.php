@@ -1,11 +1,9 @@
 <?php
-header("Location:" . base_url);
-
+// Elimina cualquier espacio en blanco o línea en blanco antes de la etiqueta <?php
+header("Refresh: 0; url=" . base_url);
+exit;
 ?>
 
 <div class="redireccionar">
-    <p>En breve sera redireccionado</p>
+    <p>En breve será redireccionado</p>
 </div>
-<?php
-// Finalizar ejecución del script
-exit;

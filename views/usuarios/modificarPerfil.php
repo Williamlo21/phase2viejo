@@ -1,6 +1,3 @@
-<?php
-// <-- var_dump($_SESSION['miUsuario']);
-?>
 <div class="formularioPerfil">
     <form action="<?= base_url ?>Usuarios/modificar" method="post">
         <table>
@@ -46,7 +43,7 @@
                     <label for="primerApellido">Primer Apellido:</label>
                 </th>
                 <td>
-                    <input type="text" name="primerApellido" required pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" value="<?= isset($_SESSION['miUsuario']['primer_apellido']) ? $_SESSION['miUsuario']['primer_apellido'] : '' ?>">
+                    <input type="text" name="primerApellido" required pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" value="<?= isset($_SESSION['miUsuario']['primer_apellido']) ? $_SESSION['miUsuario']['primer_apellido'] : '' ;?>">
                 </td>
                 <th>
                     <label for="segundoApellido">Segundo Apellido:</label>
@@ -62,12 +59,6 @@
                 </th>
                 <td>
                     <input type="date" name="fechaNacimiento" required value="<?= isset($_SESSION['miUsuario']['fecha_nacimiento']) ? $_SESSION['miUsuario']['fecha_nacimiento'] : '' ?>">
-                </td>
-                <th>
-                    <label for="edad">Edad:</label>
-                </th>
-                <td>
-                    <input type="text" name="edad" required pattern="[0-9]+" value="<?= isset($_SESSION['miUsuario']['edad']) ? $_SESSION['miUsuario']['edad'] : '' ?>">
                 </td>
                 <th>
                     <label for="genero">Género:</label>
@@ -94,7 +85,7 @@
                         <option value="4" <?= isset($_SESSION['miUsuario']['id_roll']) && $_SESSION['miUsuario']['id_roll'] == 4 ? 'selected' : '' ?>>VIGILANTE</option>
                         <option value="5" <?= isset($_SESSION['miUsuario']['id_roll']) && $_SESSION['miUsuario']['id_roll'] == 5 ? 'selected' : '' ?>>ADMINISTRATIVO</option>
                         <option value="6" <?= isset($_SESSION['miUsuario']['id_roll']) && $_SESSION['miUsuario']['id_roll'] == 6 ? 'selected' : '' ?>>VISITANTE</option>
-                        <option value="6" <?= isset($_SESSION['miUsuario']['id_roll']) && $_SESSION['miUsuario']['id_roll'] == 8 ? 'selected' : '' ?>>SUPER ADMIN</option>
+                        <option value="8" <?= isset($_SESSION['miUsuario']['id_roll']) && $_SESSION['miUsuario']['id_roll'] == 8 ? 'selected' : '' ?>>SUPER ADMIN</option>
                     </select>
                 </td>
             </tr>
@@ -127,13 +118,13 @@
                 </td>
             </tr>
 
-            <div class="botonModificar">
-                <tr>
-                    <td>
-                        <button type="submit">Modificar</button>
-                    </td>
-                </tr>
-            </div>
         </table>
+        <div class="botonModificar">
+            <tr>
+                <td>
+                    <button type="submit">Modificar</button>
+                </td>
+            </tr>
+        </div>
     </form>
 </div>

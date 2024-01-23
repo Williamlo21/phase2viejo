@@ -1363,7 +1363,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `telefono` varchar(50) NOT NULL,
   `correo_electronico` varchar(50) NOT NULL,
   `usuario` varchar(50) DEFAULT NULL,
-  `contraseña` varchar(50) DEFAULT NULL,
+  `contrasena` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `usuario_unico` (`edad`,`fecha_nacimiento`,`id_tipo_documento`,`num_documento`,`primer_nombre`,`primer_apellido`,`id_generos`) USING BTREE,
   KEY `FK_usuarios_tipo_documento` (`id_tipo_documento`),
