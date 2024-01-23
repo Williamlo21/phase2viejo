@@ -1363,7 +1363,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `telefono` varchar(50) NOT NULL,
   `correo_electronico` varchar(50) NOT NULL,
   `usuario` varchar(50) DEFAULT NULL,
-  `contraseña` varchar(50) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `usuario_unico` (`edad`,`fecha_nacimiento`,`id_tipo_documento`,`num_documento`,`primer_nombre`,`primer_apellido`,`id_generos`) USING BTREE,
   KEY `FK_usuarios_tipo_documento` (`id_tipo_documento`),
@@ -1375,7 +1375,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla bd_phase2.usuarios: ~4 rows (aproximadamente)
-INSERT IGNORE INTO `usuarios` (`id`, `id_tipo_documento`, `num_documento`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `fecha_nacimiento`, `edad`, `id_generos`, `id_roll`, `direccion`, `telefono`, `correo_electronico`, `usuario`, `contraseña`) VALUES
+INSERT IGNORE INTO `usuarios` (`id`, `id_tipo_documento`, `num_documento`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `fecha_nacimiento`, `edad`, `id_generos`, `id_roll`, `direccion`, `telefono`, `correo_electronico`, `usuario`, `password`) VALUES
 	(0, 0, '0', 'SIN', NULL, 'REGISTRAR', NULL, NULL, 0, 0, 0, NULL, '', '', NULL, NULL),
 	(1, 1, '58987546', 'NATALIA', 'LEIDY', 'MORENO', 'MOSQUERA', NULL, 0, 2, 1, 'MODELO', '3232145879', 'LEIDY@GMAIL.COM', NULL, NULL),
 	(2, 1, '5898753', 'FRANCISCO', 'JOSE', 'MONSALVE', 'REBELLON', NULL, 0, 1, 1, 'VILLAVICENCIO', '3216549878', 'FRANCISCO@GMAIL.COM', '', '0'),

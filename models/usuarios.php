@@ -18,7 +18,7 @@ class Usuario
     private $telefono;
     private $correoElectronico;
     private $user;
-    private $contrasena;
+    private $password;
     public $db;
 
 
@@ -32,11 +32,11 @@ class Usuario
             exit;
         }
     }
+
     public function getTipoDocumento()
     {
         return $this->tipoDocumento;
     }
-
 
     public function setTipoDocumento($tipoDocumento)
     {
@@ -50,7 +50,6 @@ class Usuario
         return $this->numeroDocumento;
     }
 
-
     public function setNumeroDocumento($numeroDocumento)
     {
         $this->numeroDocumento = $this->db->real_escape_string($numeroDocumento);
@@ -58,12 +57,10 @@ class Usuario
         return $this;
     }
 
-
     public function getPrimerNombre()
     {
         return $this->primerNombre;
     }
-
 
     public function setPrimerNombre($primerNombre)
     {
@@ -76,7 +73,6 @@ class Usuario
     {
         return $this->segundoNombre;
     }
-
 
     public function setSegundoNombre($segundoNombre)
     {
@@ -200,14 +196,14 @@ class Usuario
         return $this;
     }
 
-    public function getContrasena()
+    public function getPassword()
     {
-        return password_hash($this->db->real_escape_string($this->contrasena), PASSWORD_BCRYPT, ['cost' => 4]);
+        return password_hash($this->db->real_escape_string($this->password), PASSWORD_BCRYPT, ['cost' => 4]);
     }
 
-    public function setContrasena($contrasena)
+    public function setPassword($password)
     {
-        $this->contrasena = $contrasena;
+        $this->password = $password;
 
         return $this;
     }
@@ -253,7 +249,7 @@ class Usuario
     public function guardar()
     {
         $sql = "INSERT INTO usuarios
-        VALUES (NULL,'{$this->getTipoDocumento()}', '{$this->getNumeroDocumento()}', '{$this->getPrimerNombre()}', '{$this->getSegundoNombre()}', '{$this->getPrimerApellido()}', '{$this->getSegundoApellido()}', '{$this->getFechaNacimiento()}', '{$this->getEdad()}', '{$this->getGenero()}', '{$this->getRoll()}', '{$this->getDireccion()}', '{$this->getTelefono()}', '{$this->getCorreoElectronico()}', '{$this->getuser()}', '{$this->getContrasena()}')";
+        VALUES (NULL,'{$this->getTipoDocumento()}', '{$this->getNumeroDocumento()}', '{$this->getPrimerNombre()}', '{$this->getSegundoNombre()}', '{$this->getPrimerApellido()}', '{$this->getSegundoApellido()}', '{$this->getFechaNacimiento()}', '{$this->getEdad()}', '{$this->getGenero()}', '{$this->getRoll()}', '{$this->getDireccion()}', '{$this->getTelefono()}', '{$this->getCorreoElectronico()}', '{$this->getuser()}', '{$this->getPassword()}')";
         if ($this->db->query($sql)) {
             // Éxito: registro insertado correctamente
             header("Refresh: 2; url=" . base_url);
@@ -273,7 +269,7 @@ class Usuario
     {
         $result = false;
         $user = $this->user;
-        $contrasena = $this->contrasena;
+        $password = $this->password;
 
         // comprobar si existe el user
         $sql = "SELECT * FROM usuarios WHERE usuario = '$user'";
@@ -283,12 +279,13 @@ class Usuario
             $user = $login->fetch_object();
 
             // verificar la contraseña
-            $verify = password_verify($contrasena, $user->contrasena);
+            $verify = password_verify($password, $user->password);
 
             if ($verify) {
                 $result = $user;
             }
         }
+
         return $result;
     }
     // Dentro de la clase Usuario
@@ -302,7 +299,7 @@ class Usuario
         $sql = "SELECT usuarios.id, tipo_documento.descripcion AS tipo_de_documento, usuarios.num_documento,
                 usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido,
                 usuarios.fecha_nacimiento, usuarios.edad, generos.nombre as genero, roles.nombre as roll, roles.id as id_roll, usuarios.direccion,
-                usuarios.telefono, usuarios.correo_electronico, usuarios.usuario, usuarios.contrasena
+                usuarios.telefono, usuarios.correo_electronico, usuarios.usuario, usuarios.password
             FROM usuarios 
             JOIN tipo_documento ON tipo_documento.id = usuarios.id_tipo_documento
             JOIN generos ON generos.id = usuarios.id_generos

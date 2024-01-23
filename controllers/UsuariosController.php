@@ -2,45 +2,53 @@
 require_once "models/usuarios.php";
 class UsuariosController
 {
-
     public function registrar()
     {
         require_once "views/usuarios/registro.php";
     }
     // la sesion nav es para la barra de navegacion. de acuerdo al enlace que se seleccione
-    public function destruirSesionMenu(){
+    public function destruirSesionMenu()
+    {
         // esta funcion nos ayuda a destruir la sesion nav
         unset($_SESSION['nav']);
     }
+
     public function destruirSesionOpcion()
     {
         // esta funcion nos ayuda a destruir la sesion opcion
         unset($_SESSION['opcion']);
     }
-    public function redireccionar(){
+
+    public function redireccionar()
+    {
         // esta funcion nos recarga la página.
         require_once 'views/helper/redireccionar.php';
     }
+
     // utilizamos sesiones para asi mostrar lo correspondiente en el aside y el main.
     // la sesion nav es un array asociativo. el menu es para la opcion seleccionada en la barra de navegacion y opcion, es para seleccionar la opcion hecha en el aside.
-    public function miPerfil(){
+    public function miPerfil()
+    {
         // eliminamos toda sesion de nav
 
         $this->destruirSesionMenu();
         $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'verPerfil');
         $this->redireccionar();
     }
-    public function hacerRegistro(){
+    public function hacerRegistro()
+    {
         $this->destruirSesionMenu();
-        $_SESSION['nav'] = array('menu'=> 'hacerRegistro' );
+        $_SESSION['nav'] = array('menu' => 'hacerRegistro');
         $this->redireccionar();
     }
-    public function informes(){
+    public function informes()
+    {
         $this->destruirSesionMenu();
         $_SESSION['nav'] = array('menu' => 'informes');
         $this->redireccionar();
     }
-    public function crearVigilante(){
+    public function crearVigilante()
+    {
         $this->destruirSesionMenu();
         $_SESSION['nav'] = array('menu' => 'crearVigilante');
         $this->redireccionar();
@@ -56,9 +64,6 @@ class UsuariosController
 
         // Llamar a la función para obtener el usuario
         $_SESSION['miUsuario'] = $user->verUsuario();
-        // var_dump($_SESSION['miUsuario']);
-        // var_dump($usuario);
-        // die();
 
         // Verificar si la consulta fue exitosa
         if ($_SESSION['miUsuario'] !== false) {
@@ -77,8 +82,9 @@ class UsuariosController
         $this->destruirSesionOpcion();
         $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'modificarPerfil');
         $this->redireccionar();
-    } 
-    public function modificar(){
+    }
+    public function modificar()
+    {
         // Obtener valores de $_POST o ajustar según la fuente de datos
         $tipoDocumento = isset($_POST['tipoDocumento']) ? $_POST['tipoDocumento'] : '';
         $numeroDocumento = isset($_POST['numeroDocumento']) ? $_POST['numeroDocumento'] : '';
@@ -149,13 +155,13 @@ class UsuariosController
         $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
         $correoElectronico = isset($_POST['correoElectronico']) ? $_POST['correoElectronico'] : '';
         $user = isset($_POST['user']) ? $_POST['user'] : '';
-        $contrasena = isset($_POST['contrasena']) ? $_POST['contrasena'] : '';
-        
+        $password = isset($_POST['password']) ? $_POST['password'] : '';
+
 
         try {
             // Verificar si los campos obligatorios no están vacíos
-            if (!empty($tipoDocumento) && !empty($numeroDocumento) && !empty($primerNombre) && !empty($segundoNombre) && !empty($primerApellido) && !empty($segundoApellido) && !empty($fechaNacimiento) && !empty($edad) && !empty($genero) && !empty($roll) && !empty($direccion) && !empty($telefono) && !empty($correoElectronico) && !empty($user) && !empty($contrasena)) {
-    
+            if (!empty($tipoDocumento) && !empty($numeroDocumento) && !empty($primerNombre) && !empty($segundoNombre) && !empty($primerApellido) && !empty($segundoApellido) && !empty($fechaNacimiento) && !empty($edad) && !empty($genero) && !empty($roll) && !empty($direccion) && !empty($telefono) && !empty($correoElectronico) && !empty($user) && !empty($password)) {
+
                 // Crear un nuevo objeto de modelo (suponiendo que tienes una clase Usuario para manejar usuarios)
                 $usuario = new Usuario;
 
@@ -174,7 +180,7 @@ class UsuariosController
                 $usuario->setTelefono($telefono);
                 $usuario->setCorreoElectronico($correoElectronico);
                 $usuario->setUser($user);
-                $usuario->setContrasena($contrasena);
+                $usuario->setPassword($password);
 
                 ob_start(); // Activar el búfer de salida
                 // Guardar el usuario (suponiendo que tienes un método guardar en la clase Usuario)
@@ -196,6 +202,7 @@ class UsuariosController
     {
         require_once "views/usuarios/loginUsuarios.php";
     }
+
     public function iniciarSesion()
     {
         if (isset($_POST)) {
@@ -203,7 +210,7 @@ class UsuariosController
             //Consulta a la base datos
             $usuario = new Usuario();
             $usuario->setUser($_POST['user']);
-            $usuario->setContrasena($_POST['contrasena']);
+            $usuario->setPassword($_POST['password']);
 
             $identity = $usuario->loguearse();
 
@@ -213,15 +220,17 @@ class UsuariosController
                 $_SESSION['error_login'] = 'Identificacion fallida!!';
             }
         }
-        if($_SESSION['identity']->id_roll!=4){
+
+        if ($_SESSION['identity']->id_roll != 4) {
 
             $this->verPerfil();
-        }else{
+        } else {
             // echo "soy vigilante";
             // die();
         }
         header("Location:" . base_url);
     }
+
     public function logout()
     {
         if (isset($_SESSION['identity'])) {
@@ -232,6 +241,6 @@ class UsuariosController
             unset($_SESSION['admin']);
         }
         session_destroy();
-        header("Location:" . base_url);
+        header("Location: /");
     }
 }
