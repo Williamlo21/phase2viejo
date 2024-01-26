@@ -264,6 +264,21 @@ class Usuario
             return false;
         }
     }
+    public function modificarPassword(){
+        $idUsuario = $_SESSION['identity']->id;
+
+        // Construye la consulta UPDATE excluyendo la contraseña
+        $sql = "UPDATE usuarios SET password = '{$this->getPassword()}'
+            WHERE id = $idUsuario";
+
+        if ($this->db->query($sql)) {
+            return true;
+            exit;
+        } else {
+            return false;
+        }
+
+    }
     public function loguearse()
     {
         $result = false;

@@ -1,3 +1,5 @@
+
+
 <div class="formularioPerfil">
     <form action="<?= base_url ?>Usuarios/modificar" method="post">
         <table>
@@ -43,7 +45,7 @@
                     <label for="primerApellido">Primer Apellido:</label>
                 </th>
                 <td>
-                    <input type="text" name="primerApellido" required pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" value="<?= isset($_SESSION['miUsuario']['primer_apellido']) ? $_SESSION['miUsuario']['primer_apellido'] : '' ;?>">
+                    <input type="text" name="primerApellido" required pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" value="<?= isset($_SESSION['miUsuario']['primer_apellido']) ? $_SESSION['miUsuario']['primer_apellido'] : ''; ?>">
                 </td>
                 <th>
                     <label for="segundoApellido">Segundo Apellido:</label>

@@ -9,23 +9,28 @@ if (isset($_SESSION['identity'])) {
       case 'miPerfil':
         // Verificar si la clave 'opcion' está definida en $_SESSION
         switch ($_SESSION['nav']['opcion']) {
-          // comenzamos a hacer cada una de las opciones
+            // comenzamos a hacer cada una de las opciones
           case 'verPerfil':
-            
+
             require_once "views/usuarios/verPerfil.php";
             break;
+
           case 'modificarPerfil':
-          
+
             require_once "views/usuarios/modificarPerfil.php";
-          ?>
-        <?php
-        break;
+
+            break;
+          case 'cambiarPassword':
+
+            require_once "views/usuarios/verificarPassword.php";
+            break;
+
           default:
             echo "aun no ha seleccionado una opcion";
             // Otros casos según sea necesario
         }
 
-        ?>
+    ?>
       <?php
         break;
       case 'hacerRegistro':
@@ -66,7 +71,7 @@ if (isset($_SESSION['identity'])) {
         ?>
             <li><a href="<?= base_url ?>usuarios/verPerfil">Ver perfil</a></li>
             <li><a href="<?= base_url ?>usuarios/modificarPerfil">Modificar perfil</a></li>
-            <li><a href="#">Cambiar contraseña</a></li>
+            <li><a href="<?= base_url ?>usuarios/cambiarPassword">Cambiar contraseña</a></li>
             <li><a href="#">Generar QR</li></a>
           <?php
             break;

@@ -77,6 +77,78 @@ class UsuariosController
 
         // Puedes redireccionar si es necesario
     }
+    public function cambiarPassword(){
+        unset($_SESSION['passwordVerificada']);
+        $this->destruirSesionOpcion();
+        $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'cambiarPassword');
+        $this->redireccionar();
+    }
+    public function verificarPassword(){
+
+        $password = isset($_POST['password']) ? $_POST['password'] : '';
+        $user = $_SESSION['miUsuario']['usuario'];
+        try {
+            // Verificar si los campos obligatorios no están vacíos
+            if (!empty($password)) {
+
+                // Crear un nuevo objeto de modelo (suponiendo que tienes una clase Usuario para manejar usuarios)
+                $usuario = new Usuario;
+                $usuario->setPassword($password);
+                $usuario->setUser($user);
+                $passwordVerificada = $usuario->loguearse();
+                if ($passwordVerificada && is_object($passwordVerificada)) {
+                    $_SESSION['passwordVerificada'] = $passwordVerificada;
+                    // var_dump($_SESSION['identity'] = $identity);
+                    // die();
+                    $this->redireccionar();
+                } else {
+                    $_SESSION['error_login'] = 'Identificacion fallida!!';
+                }
+
+            } else {
+                // Campos obligatorios vacíos, manejar de acuerdo a tus necesidades
+                echo "Campos obligatorios no pueden estar vacíos.";
+            }
+        } catch (Exception $e) {
+            // Manejar cualquier excepción que pueda ocurrir durante el proceso de guardar
+            echo "Error al verificar la contraseña: " . $e->getMessage();
+        }
+    }
+    public function modificarPassword(){
+        $password = isset($_POST['password']) ? $_POST['password'] : '';
+        try {
+            // Verificar si los campos obligatorios no están vacíos
+            if (!empty($password)) {
+
+                // Crear un nuevo objeto de modelo (suponiendo que tienes una clase Usuario para manejar usuarios)
+                $usuario = new Usuario;
+                
+                $usuario->setPassword($password);
+                
+                ob_start(); // Activar el búfer de salida
+                $usuario->modificarPassword();
+                ob_end_flush();
+
+                $passwordModificada = $usuario->modificarPassword();
+                if ($passwordModificada && is_object($passwordModificada)) {
+                    $_SESSION['identity']['password'] = $passwordModificada;
+                    $_SESSION['miUsuario']['password'] = $passwordModificada;
+                    var_dump($_SESSION['identity']);
+                    
+                    require_once "views/usuarios/contraseña.php";
+                } else {
+                    $_SESSION['error_login'] = 'Modificación fallida!!';
+                }
+            } else {
+                // Campos obligatorios vacíos, manejar de acuerdo a tus necesidades
+                echo "Campos obligatorios no pueden estar vacíos.";
+            }
+        } catch (Exception $e) {
+            // Manejar cualquier excepción que pueda ocurrir durante el proceso de guardar
+            echo "Error al modificar la contraseña: " . $e->getMessage();
+        }
+    }
+
     public function modificarPerfil()
     {
         $this->destruirSesionOpcion();
@@ -128,7 +200,8 @@ class UsuariosController
                 ob_start(); // Activar el búfer de salida
                 // Guardar el usuario (suponiendo que tienes un método guardar en la clase Usuario)
                 $usuario->actualizar();
-                ob_end_clean(); // Limpiar (borrar) el contenido del búfer de salida sin enviarlo al navegador
+                // ob_end_clean(); // Limpiar (borrar) el contenido del búfer de salida sin enviarlo al navegador
+                ob_end_flush();
                 $usuarioActualizado = $usuario->verUsuario();
                 if ($usuarioActualizado) {
                     // Convertir el arreglo asociativo a un objeto si es necesario
