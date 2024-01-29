@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8 sin BOM">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="<?= base_url ?>assets/img/logo.png">
   <title>PHASE2</title>

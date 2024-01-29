@@ -33,30 +33,36 @@ class UsuariosController
 
         $this->destruirSesionMenu();
         $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'verPerfil');
-        $this->redireccionar();
+        // $this->redireccionar();
+        header("Location:" . base_url);
     }
     public function hacerRegistro()
     {
         $this->destruirSesionMenu();
         $_SESSION['nav'] = array('menu' => 'hacerRegistro');
-        $this->redireccionar();
+        // $this->redireccionar();
+        header("Location:" . base_url);
     }
     public function informes()
     {
         $this->destruirSesionMenu();
         $_SESSION['nav'] = array('menu' => 'informes');
-        $this->redireccionar();
+        // $this->redireccionar();
+        header("Location:" . base_url);
     }
     public function crearVigilante()
     {
         $this->destruirSesionMenu();
         $_SESSION['nav'] = array('menu' => 'crearVigilante');
-        $this->redireccionar();
+        // $this->redireccionar();
+        header("Location:" . base_url);
     }
     // aqui debemos hacer las sesiones para las opciones del aside segun la opcion seleccionada de la barra de mavegacion
     public function verPerfil()
     {
+        $this->destruirSesionMenu();
         $this->destruirSesionOpcion();
+
         $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'verPerfil');
 
         // Crear una instancia del usuario
@@ -69,19 +75,22 @@ class UsuariosController
         if ($_SESSION['miUsuario'] !== false) {
             // Incluir la vista que mostrará la información del usuario
             // require_once 'views/usuarios/verPerfil.php';
-            $this->redireccionar();
+            // Hacer cualquier otra operación necesaria aquí
+
+            // Redireccionar al final de la función
+            header("Location:" . base_url);
         } else {
             // Manejar el caso en que la consulta no fue exitosa
             echo "Error al obtener la información del usuario.";
         }
-
-        // Puedes redireccionar si es necesario
     }
+
     public function cambiarPassword(){
         unset($_SESSION['passwordVerificada']);
         $this->destruirSesionOpcion();
         $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'cambiarPassword');
-        $this->redireccionar();
+        // $this->redireccionar();
+        header("Location:" . base_url);
     }
     public function verificarPassword(){
 
@@ -100,7 +109,8 @@ class UsuariosController
                     $_SESSION['passwordVerificada'] = $passwordVerificada;
                     // var_dump($_SESSION['identity'] = $identity);
                     // die();
-                    $this->redireccionar();
+                    // $this->redireccionar();
+                    header("Location:" . base_url);
                 } else {
                     $_SESSION['error_login'] = 'Identificacion fallida!!';
                 }
@@ -133,9 +143,14 @@ class UsuariosController
                 if ($passwordModificada && is_object($passwordModificada)) {
                     $_SESSION['identity']['password'] = $passwordModificada;
                     $_SESSION['miUsuario']['password'] = $passwordModificada;
-                    var_dump($_SESSION['identity']);
-                    
-                    require_once "views/usuarios/contraseña.php";
+                    // // var_dump($_SESSION['identity']);
+                    // echo "contraseña modificada";
+                    // $url = "/adso/phase2/contraseña.php";
+                    // $url_codificada = urlencode($url);
+                    // header("Location: $url_codificada");
+                    // require_once __DIR__ . "views/usuarios/contraseña.php";
+
+                    header("Location:" . base_url);
                 } else {
                     $_SESSION['error_login'] = 'Modificación fallida!!';
                 }
@@ -153,7 +168,8 @@ class UsuariosController
     {
         $this->destruirSesionOpcion();
         $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'modificarPerfil');
-        $this->redireccionar();
+        // $this->redireccionar();
+        header("Location:" . base_url);
     }
     public function modificar()
     {
@@ -197,11 +213,11 @@ class UsuariosController
                 $usuario->setCorreoElectronico($correoElectronico);
                 $usuario->setUser($user);
 
-                ob_start(); // Activar el búfer de salida
+                // ob_start(); // Activar el búfer de salida
                 // Guardar el usuario (suponiendo que tienes un método guardar en la clase Usuario)
                 $usuario->actualizar();
                 // ob_end_clean(); // Limpiar (borrar) el contenido del búfer de salida sin enviarlo al navegador
-                ob_end_flush();
+                // ob_end_flush();
                 $usuarioActualizado = $usuario->verUsuario();
                 if ($usuarioActualizado) {
                     // Convertir el arreglo asociativo a un objeto si es necesario
@@ -209,10 +225,14 @@ class UsuariosController
 
                     // Actualizar la sesión $_SESSION['identity']
                     $_SESSION['identity'] = $identityObject;
+                    // $this->destruirSesionOpcion();
+                    $this->verPerfil();
+                    // $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'verPerfil');
+                    // header("Location: " . base_url );
+                    // header("Location:" . base_url);
+                    exit();
                 }
 
-                $this->verPerfil();
-                exit;
             } else {
                 // Campos obligatorios vacíos, manejar de acuerdo a tus necesidades
                 echo "Campos obligatorios no pueden estar vacíos.";
