@@ -1,4 +1,14 @@
 <?php
+if(isset($_SESSION['notificacionTrue'])){
+  ?>
+  <div class="notificacion">
+    <div class="true">
+      
+    </div>
+  </div>
+  <?php
+}
+
 if (isset($_SESSION['identity'])) {
   // echo "el usuario es de rol: " . $_SESSION['identity']->id_roll;
   // echo "id del usuario es: ". $_SESSION['identity']->id;

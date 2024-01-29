@@ -85,15 +85,16 @@ class UsuariosController
         }
     }
 
-    public function cambiarPassword(){
+    public function cambiarPassword()
+    {
         unset($_SESSION['passwordVerificada']);
         $this->destruirSesionOpcion();
         $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'cambiarPassword');
         // $this->redireccionar();
         header("Location:" . base_url);
     }
-    public function verificarPassword(){
-
+    public function verificarPassword()
+    {
         $password = isset($_POST['password']) ? $_POST['password'] : '';
         $user = $_SESSION['miUsuario']['usuario'];
         try {
@@ -114,7 +115,6 @@ class UsuariosController
                 } else {
                     $_SESSION['error_login'] = 'Identificacion fallida!!';
                 }
-
             } else {
                 // Campos obligatorios vacíos, manejar de acuerdo a tus necesidades
                 echo "Campos obligatorios no pueden estar vacíos.";
@@ -124,7 +124,8 @@ class UsuariosController
             echo "Error al verificar la contraseña: " . $e->getMessage();
         }
     }
-    public function modificarPassword(){
+    public function modificarPassword()
+    {
         $password = isset($_POST['password']) ? $_POST['password'] : '';
         try {
             // Verificar si los campos obligatorios no están vacíos
@@ -132,25 +133,18 @@ class UsuariosController
 
                 // Crear un nuevo objeto de modelo (suponiendo que tienes una clase Usuario para manejar usuarios)
                 $usuario = new Usuario;
-                
+
                 $usuario->setPassword($password);
-                
+
                 ob_start(); // Activar el búfer de salida
                 $usuario->modificarPassword();
-                ob_end_flush();
 
                 $passwordModificada = $usuario->modificarPassword();
-                if ($passwordModificada && is_object($passwordModificada)) {
-                    $_SESSION['identity']['password'] = $passwordModificada;
-                    $_SESSION['miUsuario']['password'] = $passwordModificada;
-                    // // var_dump($_SESSION['identity']);
-                    // echo "contraseña modificada";
-                    // $url = "/adso/phase2/contraseña.php";
-                    // $url_codificada = urlencode($url);
-                    // header("Location: $url_codificada");
-                    // require_once __DIR__ . "views/usuarios/contraseña.php";
+                // require_once "views/usuarios/contrasena.php";
 
-                    header("Location:" . base_url);
+                if ($passwordModificada) {
+                    $this->verPerfil();
+                    exit;
                 } else {
                     $_SESSION['error_login'] = 'Modificación fallida!!';
                 }
@@ -232,7 +226,6 @@ class UsuariosController
                     // header("Location:" . base_url);
                     exit();
                 }
-
             } else {
                 // Campos obligatorios vacíos, manejar de acuerdo a tus necesidades
                 echo "Campos obligatorios no pueden estar vacíos.";
@@ -260,7 +253,7 @@ class UsuariosController
         $correoElectronico = isset($_POST['correoElectronico']) ? $_POST['correoElectronico'] : '';
         $user = isset($_POST['user']) ? $_POST['user'] : '';
         $password = isset($_POST['password']) ? $_POST['password'] : '';
-        
+
 
         try {
             // Verificar si los campos obligatorios no están vacíos
@@ -286,7 +279,7 @@ class UsuariosController
                 $usuario->setCorreoElectronico($correoElectronico);
                 $usuario->setUser($user);
                 $usuario->setPassword($password);
-                
+
                 ob_start(); // Activar el búfer de salida
                 // Guardar el usuario (suponiendo que tienes un método guardar en la clase Usuario)
                 $usuario->guardar();
@@ -296,7 +289,6 @@ class UsuariosController
             } else {
                 // Campos obligatorios vacíos, manejar de acuerdo a tus necesidades
                 echo "Campos obligatorios no pueden estar vacíos.";
-                
             }
         } catch (Exception $e) {
             // Manejar cualquier excepción que pueda ocurrir durante el proceso de guardar
