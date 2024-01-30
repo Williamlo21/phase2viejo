@@ -53,7 +53,8 @@ if (isset($_SESSION['identity'])) {
             require_once "views/usuarios/verificarPassword.php";
             break;
           case 'misVehiculos':
-            require_once "views/"
+            require_once "views/vehiculos/index.php";
+            break;
 
           default:
             echo "aun no ha seleccionado una opcion";
