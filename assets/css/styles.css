@@ -363,24 +363,46 @@ select {
 /* cookies para las notificaciones */
 .notificacion {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
-    background-color: #f2f2f2;
-    padding: 15px;
-    border: 1px solid #d4d4d4;
-    border-radius: 5px;
-    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.notificacion img{
+    width: 200px;
+}
+.notificacion .exito::before {
+    content: "✅ ";
+    font-size: 24px;
+    /* Ajusta el tamaño según tus preferencias */
+    color: green;
 }
 
-.error {
-    color: #D8000C;
-    background-color: #FFBABA;
+.notificacion .error::before {
+    content: "❌ ";
+    font-size: 24px;
+    /* Ajusta el tamaño según tus preferencias */
+    color: red;
 }
 
 .exito {
-    color: #4F8A10;
-    background-color: #DFF2BF;
+    color: green;
 }
+
+.error {
+    color: red;
+}
+
+/* Estilos para el formulario */
 button {
     background-color: green;
     color: white;

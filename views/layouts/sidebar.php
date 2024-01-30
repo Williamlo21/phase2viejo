@@ -1,13 +1,31 @@
 <?php
-if(isset($_SESSION['notificacionTrue'])){
-  ?>
+// Verificar si existe la sesión 'notificacion'
+if (isset($_SESSION['notificacion'])) {
+?>
   <div class="notificacion">
-    <div class="true">
-      
-    </div>
+    <?php
+    // Obtener el tipo y el mensaje de la notificación
+    $tipoNotificacion = $_SESSION['notificacion']['tipo'];
+    $mensajeNotificacion = $_SESSION['notificacion']['mensaje'];
+
+    // Imprimir el mensaje con un estilo diferente según el tipo
+    if ($tipoNotificacion === 'exito') {
+      echo '<div class="exito">' . $mensajeNotificacion . '</div>';
+    } elseif ($tipoNotificacion === 'error') {
+      echo '<div class="error">' . $mensajeNotificacion . '</div>';
+    }
+
+    // Limpiar la sesión de notificación para que no se muestre en futuras cargas de la página
+    unset($_SESSION['notificacion']);
+    ?>
+    <form action="" method="post">
+      <button type="submit">Aceptar</button>
+    </form>
   </div>
-  <?php
+<?php
 }
+?>
+<?php
 
 if (isset($_SESSION['identity'])) {
   // echo "el usuario es de rol: " . $_SESSION['identity']->id_roll;
@@ -34,6 +52,8 @@ if (isset($_SESSION['identity'])) {
 
             require_once "views/usuarios/verificarPassword.php";
             break;
+          case 'misVehiculos':
+            require_once "views/"
 
           default:
             echo "aun no ha seleccionado una opcion";

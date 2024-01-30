@@ -1,9 +1,4 @@
-<script>
-        function cerrarNotificacion() {
-                // Ocultar la notificación
-                document.getElementById('notificacion').style.display = 'none';
-        }
-</script>
+
 
 </div>
 </body>

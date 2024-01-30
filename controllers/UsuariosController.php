@@ -111,17 +111,21 @@ class UsuariosController
                     // var_dump($_SESSION['identity'] = $identity);
                     // die();
                     // $this->redireccionar();
+                    $_SESSION['notificacion'] = array('tipo' => 'exito', 'mensaje' => 'Contraseña verificada.');
                     header("Location:" . base_url);
                 } else {
-                    $_SESSION['error_login'] = 'Identificacion fallida!!';
+                    $_SESSION['notificacion'] = array('tipo' => 'error', 'mensaje' => 'Contraseña invalida');
+            
                 }
             } else {
                 // Campos obligatorios vacíos, manejar de acuerdo a tus necesidades
-                echo "Campos obligatorios no pueden estar vacíos.";
+                // echo "Campos obligatorios no pueden estar vacíos.";
             }
         } catch (Exception $e) {
             // Manejar cualquier excepción que pueda ocurrir durante el proceso de guardar
             echo "Error al verificar la contraseña: " . $e->getMessage();
+            $_SESSION['notificacion'] = array('tipo' => 'error', 'mensaje' => 'Contraseña invalida');
+            
         }
     }
     public function modificarPassword()
@@ -143,10 +147,12 @@ class UsuariosController
                 // require_once "views/usuarios/contrasena.php";
 
                 if ($passwordModificada) {
+                    // 
+                    $_SESSION['notificacion'] = array('tipo' => 'exito', 'mensaje' => 'Contraseña modificada con éxito');
                     $this->verPerfil();
                     exit;
                 } else {
-                    $_SESSION['error_login'] = 'Modificación fallida!!';
+                    $_SESSION['notificacion'] = array('tipo' => 'error', 'mensaje' => 'Error al modificar la contraseña');
                 }
             } else {
                 // Campos obligatorios vacíos, manejar de acuerdo a tus necesidades
@@ -155,6 +161,8 @@ class UsuariosController
         } catch (Exception $e) {
             // Manejar cualquier excepción que pueda ocurrir durante el proceso de guardar
             echo "Error al modificar la contraseña: " . $e->getMessage();
+            $_SESSION['notificacion'] = array('tipo' => 'error', 'mensaje' => 'Error al modificar la contraseña');
+                
         }
     }
 
@@ -219,6 +227,7 @@ class UsuariosController
 
                     // Actualizar la sesión $_SESSION['identity']
                     $_SESSION['identity'] = $identityObject;
+                    $_SESSION['notificacion'] = array('tipo' => 'exito', 'mensaje' => 'Información modificada con éxito.');
                     // $this->destruirSesionOpcion();
                     $this->verPerfil();
                     // $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'verPerfil');
@@ -233,6 +242,8 @@ class UsuariosController
         } catch (Exception $e) {
             // Manejar cualquier excepción que pueda ocurrir durante el proceso de guardar
             echo "Error al guardar el usuario: " . $e->getMessage();
+            $_SESSION['notificacion'] = array('tipo' => 'error', 'mensaje' => 'Error al modificar la información');
+                
         }
     }
     public function guardar()
@@ -285,14 +296,20 @@ class UsuariosController
                 $usuario->guardar();
                 // Redireccionar a la página principal (o a la que desees)
                 echo '<script>window.location.href = "' . base_url . '";</script>';
+                $_SESSION['notificacion'] = array('tipo' => 'exito', 'mensaje' => 'Usuario guardado con éxito.');
+        
                 exit;
             } else {
                 // Campos obligatorios vacíos, manejar de acuerdo a tus necesidades
                 echo "Campos obligatorios no pueden estar vacíos.";
+                $_SESSION['notificacion'] = array('tipo' => 'error', 'mensaje' => 'Campos obligatorios no pueden estar vacíos');
+            
             }
         } catch (Exception $e) {
             // Manejar cualquier excepción que pueda ocurrir durante el proceso de guardar
             echo "Error al guardar el usuario: " . $e->getMessage();
+            $_SESSION['notificacion'] = array('tipo' => 'error', 'mensaje' => 'Error al guardar el usuario');
+            
         }
     }
 
@@ -316,8 +333,11 @@ class UsuariosController
                 $_SESSION['identity'] = $identity;
                 // var_dump($_SESSION['identity'] = $identity);
                 // die();
+                $_SESSION['notificacion'] = array('tipo' => 'exito', 'mensaje' => 'Sessión iniciada.');
+                    
             } else {
-                $_SESSION['error_login'] = 'Identificacion fallida!!';
+                $_SESSION['notificacion'] = array('tipo' => 'error', 'mensaje' => 'Usuario o contraseña errado');
+            
             }
         }
 
