@@ -52,6 +52,9 @@ if (isset($_SESSION['identity'])) {
 
             require_once "views/usuarios/verificarPassword.php";
             break;
+          case 'preRegistro':
+            require_once "views/usuarios/verPreRegistro.php";
+            break;
           case 'misVehiculos':
             require_once "views/vehiculos/index.php";
             break;
@@ -92,8 +95,7 @@ if (isset($_SESSION['identity'])) {
     }
     ?>
   </main>
-  <aside class="aside">
-    <p>esta sera la barra de apoyo</p>
+  <aside class="aside"> 
     <article>
       <ul>
         <?php
@@ -103,6 +105,7 @@ if (isset($_SESSION['identity'])) {
             <li><a href="<?= base_url ?>usuarios/verPerfil">Ver perfil</a></li>
             <li><a href="<?= base_url ?>usuarios/modificarPerfil">Modificar perfil</a></li>
             <li><a href="<?= base_url ?>usuarios/cambiarPassword">Cambiar contraseña</a></li>
+            <li><a href="<?= base_url ?>usuarios/preRegistro">Pre - registro</a></li>
             <li><a href="#">Generar QR</li></a>
           <?php
             break;

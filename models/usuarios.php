@@ -259,12 +259,12 @@ class Usuario
         VALUES (NULL,'{$this->getTipoDocumento()}', '{$this->getNumeroDocumento()}', '{$this->getPrimerNombre()}', '{$this->getSegundoNombre()}', '{$this->getPrimerApellido()}', '{$this->getSegundoApellido()}', '{$this->getFechaNacimiento()}', '{$this->getEdad()}', '{$this->getGenero()}', '{$this->getRoll()}', '{$this->getDireccion()}', '{$this->getTelefono()}', '{$this->getCorreoElectronico()}', '{$this->getuser()}', '{$this->getPassword()}')";
         if ($this->db->query($sql)) {
             return true;
-
         } else {
             return false;
         }
     }
-    public function modificarPassword(){
+    public function modificarPassword()
+    {
         $idUsuario = $_SESSION['identity']->id;
 
         // Construye la consulta UPDATE excluyendo la contraseña
@@ -277,8 +277,43 @@ class Usuario
         } else {
             return false;
         }
-
     }
+    public function consultaDatosPreRegistro($idUser)
+    {
+        $sql = "SELECT pre_registros.id, usuarios.id, tipo_documento.descripcion AS tipo_de_documento, usuarios.num_documento,
+        usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido,
+        roles.nombre as roll, usuarios.telefono, usuarios.correo_electronico, vehiculos.id AS vehiculo, tipo_vehiculo.nombre AS tipoDeVehiculo, 
+        marcas_vehiculos.nombre AS marcaVehiculo, vehiculos.placa, vehiculos.color AS colorVehiculo, equipos_computadores.id AS equipo, marcas_computadores.nombre AS marcaEquipo,
+        equipos_computadores.referencia, equipos_computadores.color AS colorEquipo
+        FROM pre_registros
+        JOIN usuarios ON usuarios.id = pre_registros.id_usuario
+        JOIN tipo_documento ON tipo_documento.id = usuarios.id_tipo_documento
+        JOIN roles ON roles.id = usuarios.id_roll
+        LEFT JOIN vehiculos ON vehiculos.id = pre_registros.id_vehiculo
+        LEFT JOIN tipo_vehiculo ON tipo_vehiculo.id = vehiculos.id_tipo_vehiculo
+        LEFT JOIN marcas_vehiculos ON marcas_vehiculos.id = vehiculos.id_marca
+        LEFT JOIN equipos_computadores ON equipos_computadores.id = pre_registros.id_equipo_computador
+        LEFT JOIN marcas_computadores ON marcas_computadores.id = equipos_computadores.id_marca_equipo
+
+        WHERE usuarios.id = $idUser;";
+        $preRegistro = $this->db->query($sql);
+        if ($preRegistro && $preRegistro->num_rows == 1) {
+            $userPreRegistro = $preRegistro->fetch_assoc();
+        }
+        return $userPreRegistro;
+    }
+    public function existePreRegistro($idUser)
+    {
+
+        $sql = "SELECT id from pre_registros where id_usuario = $idUser";
+        $preRegistro = $this->db->query($sql);
+        if ($preRegistro && $preRegistro->num_rows == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function loguearse()
     {
         $result = false;

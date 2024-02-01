@@ -178,15 +178,15 @@ class UsuariosController
         // Obtener valores de $_POST o ajustar según la fuente de datos
         $tipoDocumento = isset($_POST['tipoDocumento']) ? $_POST['tipoDocumento'] : $_SESSION['miUsuario']['tipo_de_documento'];
         $numeroDocumento = isset($_POST['numeroDocumento']) ? $_POST['numeroDocumento'] : $_SESSION['miUsuario']['num_documento'];
-        $primerNombre = isset($_POST['primerNombre']) ? $_POST['primerNombre'] : $_SESSION['miUsuario']['primer_nombre'];
-        $segundoNombre = isset($_POST['segundoNombre']) ? $_POST['segundoNombre'] : $_SESSION['miUsuario']['segundo_nombre'];
-        $primerApellido = isset($_POST['primerApellido']) ? $_POST['primerApellido'] : $_SESSION['miUsuario']['primer_apellido'];
-        $segundoApellido = isset($_POST['segundoApellido']) ? $_POST['segundoApellido'] : $_SESSION['miUsuario']['segundo_apellido'];
+        $primerNombre = isset($_POST['primerNombre']) ? strtoupper($_POST['primerNombre']) : $_SESSION['miUsuario']['primer_nombre'];
+        $segundoNombre = isset($_POST['segundoNombre']) ? strtoupper($_POST['segundoNombre']) : $_SESSION['miUsuario']['segundo_nombre'];
+        $primerApellido = isset($_POST['primerApellido']) ? strtoupper($_POST['primerApellido']) : $_SESSION['miUsuario']['primer_apellido'];
+        $segundoApellido = isset($_POST['segundoApellido']) ? strtoupper($_POST['segundoApellido']) : $_SESSION['miUsuario']['segundo_apellido'];
         $fechaNacimiento = isset($_POST['fechaNacimiento']) ? $_POST['fechaNacimiento'] : $_SESSION['miUsuario']['fecha_nacimiento'];
         // $edad = isset($_POST['edad']) ? $_POST['edad'] : $_SESSION['miUsuario']['edad'];
         $genero = isset($_POST['genero']) ? $_POST['genero'] : $_SESSION['miUsuario']['genero'];
         $roll = isset($_POST['roll']) ? $_POST['roll'] : $_SESSION['miUsuario']['id_roll'];
-        $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : $_SESSION['miUsuario']['direccion'];
+        $direccion = isset($_POST['direccion']) ? strtoupper($_POST['direccion']) : $_SESSION['miUsuario']['direccion'];
         $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : $_SESSION['miUsuario']['telefono'];
         $correoElectronico = isset($_POST['correoElectronico']) ? $_POST['correoElectronico'] : $_SESSION['miUsuario']['correo_electronico'];
         $user = isset($_POST['user']) ? $_POST['user'] : $_SESSION['miUsuario']['usuario'];
@@ -249,17 +249,18 @@ class UsuariosController
     public function guardar()
     {
         // Obtener valores de $_POST o ajustar según la fuente de datos
-        $tipoDocumento = isset($_POST['tipoDocumento']) ? $_POST['tipoDocumento'] : '';
-        $numeroDocumento = isset($_POST['numeroDocumento']) ? $_POST['numeroDocumento'] : '';
-        $primerNombre = isset($_POST['primerNombre']) ? $_POST['primerNombre'] : '';
-        $segundoNombre = isset($_POST['segundoNombre']) ? $_POST['segundoNombre'] : '';
-        $primerApellido = isset($_POST['primerApellido']) ? $_POST['primerApellido'] : '';
-        $segundoApellido = isset($_POST['segundoApellido']) ? $_POST['segundoApellido'] : '';
+        // la funcion strtoupper es para convertir las cadenas de texto a mayusculas
+        $tipoDocumento = isset($_POST['tipoDocumento']) ? strtoupper($_POST['tipoDocumento']) : '';
+        $numeroDocumento = isset($_POST['numeroDocumento']) ? strtoupper($_POST['numeroDocumento']) : '';
+        $primerNombre = isset($_POST['primerNombre']) ? strtoupper($_POST['primerNombre']) : '';
+        $segundoNombre = isset($_POST['segundoNombre']) ? strtoupper($_POST['segundoNombre']) : '';
+        $primerApellido = isset($_POST['primerApellido']) ? strtoupper($_POST['primerApellido']) : '';
+        $segundoApellido = isset($_POST['segundoApellido']) ? strtoupper($_POST['segundoApellido']) : '';
         $fechaNacimiento = isset($_POST['fechaNacimiento']) ? $_POST['fechaNacimiento'] : '';
         // $edad = isset($_POST['edad']) ? $_POST['edad'] : '';
         $genero = isset($_POST['genero']) ? $_POST['genero'] : '';
         $roll = isset($_POST['roll']) ? $_POST['roll'] : '';
-        $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : '';
+        $direccion = isset($_POST['direccion']) ? strtoupper($_POST['direccion']) : '';
         $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
         $correoElectronico = isset($_POST['correoElectronico']) ? $_POST['correoElectronico'] : '';
         $user = isset($_POST['user']) ? $_POST['user'] : '';
@@ -311,6 +312,29 @@ class UsuariosController
             $_SESSION['notificacion'] = array('tipo' => 'error', 'mensaje' => 'Error al guardar el usuario');
             
         }
+    }
+    public function preRegistro()
+    {
+        $this->destruirSesionOpcion();
+        $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'preRegistro');
+        
+        // creamos una consulta donde nos diga si existe un preRegistro o debemos crearlo.
+        $idUser = $_SESSION['miUsuario']['id'];
+        $usuario = new Usuario();
+        $existePreRegistro= $usuario->existePreRegistro($idUser);
+        
+        
+        if($existePreRegistro){
+            $datosPreRegistro = $usuario->consultaDatosPreRegistro($idUser);
+            $_SESSION['datosPreRegistro'] = $datosPreRegistro;
+            // var_dump($_SESSION['datosPreRegistro']);
+
+        }
+        // $this->redireccionar();
+        header("Location:" . base_url);
+    }
+    public function hacerPreRegistro(){
+
     }
 
     public function login()

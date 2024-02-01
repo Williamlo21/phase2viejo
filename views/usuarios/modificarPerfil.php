@@ -112,7 +112,7 @@ ob_start();
           <label for="user">Usuario:</label>
         </th>
         <td>
-          <input type="text" name="user" required value="<?= isset($_SESSION['miUsuario']['usuario']) ? $_SESSION['miUsuario']['usuario'] : '' ?>">
+          <input type="text" name="user" class="no-uppercase" required value="<?= isset($_SESSION['miUsuario']['usuario']) ? $_SESSION['miUsuario']['usuario'] : '' ?>">
         </td>
       </tr>
     </table>

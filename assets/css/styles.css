@@ -10,7 +10,13 @@ body {
     /* min-width: 50vh; */
     margin: 0;
     padding: 0;
-
+    
+}
+input[type="text"]{
+    text-transform: uppercase;
+}
+input.no-uppercase {
+    text-transform: none;
 }
 
 .datosUsuario {
@@ -236,7 +242,8 @@ position: absolute;
     position: absolute;
     top: 33%;
     width: 80%;
-    height: 80%;
+    min-height: 80%;
+        height: auto;;
     float: left;
     background-color: rgba(255, 255, 255, 0.5);
     color: black;
@@ -250,7 +257,8 @@ position: absolute;
     top: 33%;
     right: 0;
     width: 20%;
-    height: 80%;
+    min-height: 80%;
+        height: auto;
     background-color: rgba(255, 255, 255, 0.5);
     box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
     /* Agregamos la sombra al lado izquierdo */
@@ -344,7 +352,6 @@ label {
     display: block;
     margin-bottom: 5px;
 }
-
 input,
 select {
     width: calc(100% - 20px);
