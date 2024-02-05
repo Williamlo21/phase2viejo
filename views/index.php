@@ -32,4 +32,3 @@ if (isset($_SESSION['identity'])) {
   </div>
 <?php
 }
-?>

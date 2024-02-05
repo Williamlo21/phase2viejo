@@ -1,8 +1,9 @@
 <?php
 
-class DefaultController{
-public function index()
+class DefaultController
 {
-require_once "views/index.php";
-}
+    public function index()
+    {
+        require_once "views/index.php";
+    }
 }

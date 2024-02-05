@@ -57,10 +57,12 @@
       <label for="user">Usuario:</label>
       <input type="text" name="user" required class="no-uppercase">
 
+
       <label for="password">Contraseña:</label>
       <input type="password" name="password" required>
       <button type="submit">Enviar</button>
     </form>
     <p>¿Ya tienes cuenta?</p><a href="<?= base_url ?>">Inicia sesión aquí.</a><br>
   </div>
+in/main
 </div>

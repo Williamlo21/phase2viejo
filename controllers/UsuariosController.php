@@ -40,8 +40,10 @@ class UsuariosController
     {
         $this->destruirSesionMenu();
         $_SESSION['nav'] = array('menu' => 'hacerRegistro');
-        // $this->redireccionar();
         header("Location:" . base_url);
+
+        $this->redireccionar();
+
     }
     public function informes()
     {
@@ -170,8 +172,10 @@ class UsuariosController
     {
         $this->destruirSesionOpcion();
         $_SESSION['nav'] = array('menu' => 'miPerfil', 'opcion' => 'modificarPerfil');
-        // $this->redireccionar();
         header("Location:" . base_url);
+
+        $this->redireccionar();
+
     }
     public function modificar()
     {
@@ -270,6 +274,7 @@ class UsuariosController
         try {
             // Verificar si los campos obligatorios no están vacíos
             if (!empty($tipoDocumento) && !empty($numeroDocumento) && !empty($primerNombre) && !empty($segundoNombre) && !empty($primerApellido) && !empty($segundoApellido) && !empty($fechaNacimiento) && !empty($genero) && !empty($roll) && !empty($direccion) && !empty($telefono) && !empty($correoElectronico) && !empty($user) && !empty($password)) {
+
 
                 // Crear un nuevo objeto de modelo (suponiendo que tienes una clase Usuario para manejar usuarios)
                 $usuario = new Usuario;
@@ -385,7 +390,10 @@ class UsuariosController
             unset($_SESSION['admin']);
         }
         session_destroy();
+
         // header("Location: /");
         header("Location:" . base_url);
+
+
     }
 }

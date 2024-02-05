@@ -3,3 +3,4 @@
 // header("Refresh: 0; url=" . base_url);
 header("Location:" . base_url);
 exit;
+?>

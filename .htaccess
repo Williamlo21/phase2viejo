@@ -1,7 +1,8 @@
 <IfModule mod_rewrite.c>
 # Activar mod_rewrite
 RewriteEngine on 
-ErrorDocument 404 /adso/phase2/Error/index
+
+ErrorDocument 404 /phase2/Error/index
 
 
 RewriteCond %{SCRIPT_FILENAME} !-d 
